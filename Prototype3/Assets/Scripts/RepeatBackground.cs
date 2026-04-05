@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class RepeatBackground : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Vector3 startPosition;
+
+    public float resetPositionX = -50;
+
     void Start()
     {
-        
+        startPosition = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (transform.position.x <= startPosition.x - resetPositionX)
+        {
+            transform.position = startPosition;
+        }
     }
 }

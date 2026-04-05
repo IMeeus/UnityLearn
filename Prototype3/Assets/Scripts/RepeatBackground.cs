@@ -1,19 +1,20 @@
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class RepeatBackground : MonoBehaviour
 {
     private Vector3 startPosition;
-
-    public float resetPositionX = 50;
+    private float repeatWidth;
 
     void Start()
     {
         startPosition = transform.position;
+        repeatWidth = GetComponent<BoxCollider>().size.x / 2;
     }
 
     void Update()
     {
-        if (transform.position.x <= startPosition.x - resetPositionX)
+        if (transform.position.x <= startPosition.x - repeatWidth)
         {
             transform.position = startPosition;
         }

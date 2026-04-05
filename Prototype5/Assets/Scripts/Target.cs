@@ -17,10 +17,14 @@ public class Target : MonoBehaviour
         rb.AddForce(RandomForce(), ForceMode.Impulse);
 
         var torque = new Vector3(RandomTorque(), RandomTorque(), RandomTorque());
-        Debug.Log($"Torque: {torque}");
         rb.AddTorque(torque, ForceMode.Impulse);
 
         transform.position = RandomSpawnPos();
+    }
+
+    void OnTriggerEnter(Collider _)
+    {
+        Destroy(gameObject);
     }
 
     Vector3 RandomForce()

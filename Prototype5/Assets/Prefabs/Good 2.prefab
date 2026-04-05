@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3324083673706050152}
   m_Layer: 0
   m_Name: Good 2
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,8 +153,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc3f7cac48926f40bd1ba31ba5ade9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Target
-  minSpeed: 12
-  maxSpeed: 16
-  maxTorque: 2
-  xRange: 4
-  ySpawnPos: -6

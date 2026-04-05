@@ -4,7 +4,7 @@ public class RepeatBackground : MonoBehaviour
 {
     private Vector3 startPosition;
 
-    public float resetPositionX = -50;
+    public float resetPositionX = 50;
 
     void Start()
     {

@@ -504,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66231bdfa6b2154dafb03abaa685a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RepeatBackground
+  resetPositionX: 56.4
 --- !u!1001 &1661639077
 PrefabInstance:
   m_ObjectHideFlags: 0

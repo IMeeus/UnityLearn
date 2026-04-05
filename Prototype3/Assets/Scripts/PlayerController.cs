@@ -2,9 +2,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody rb;
+    private Rigidbody _rb;
+    private Animator _animator;
 
     public InputActionReference jumpAction;
     public float jumpForce = 10;
@@ -14,7 +16,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
+
         Physics.gravity *= gravityModifier;
     }
 
@@ -22,8 +26,9 @@ public class PlayerController : MonoBehaviour
     {
         if (isOnGround && jumpAction.action.WasPressedThisFrame())
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
+            _animator.SetTrigger("Jump_trig");
         }
     }
 

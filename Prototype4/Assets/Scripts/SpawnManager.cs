@@ -8,7 +8,28 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        Instantiate(enemyPrefab, GenerateSpawnPoint(), enemyPrefab.transform.rotation);
+        SpawnEnemyWave(3);
+    }
+
+    void Update()
+    {
+        RespawnEnemies();
+    }
+
+    private void SpawnEnemyWave(int spawnCount)
+    {
+        for (int i = 0; i < spawnCount; i++)
+        {
+            Instantiate(enemyPrefab, GenerateSpawnPoint(), enemyPrefab.transform.rotation);
+        }
+    }
+
+    private void RespawnEnemies()
+    {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        {
+            SpawnEnemyWave(1);
+        }
     }
 
     private Vector3 GenerateSpawnPoint()

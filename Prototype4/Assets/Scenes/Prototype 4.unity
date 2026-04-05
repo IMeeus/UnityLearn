@@ -851,7 +851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 10
   hasPowerUp: 0
-  powerUpStrength: 15
+  powerUpStrength: 10
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   powerUpIndicator: {fileID: 336961992}
 --- !u!1 &1827795808

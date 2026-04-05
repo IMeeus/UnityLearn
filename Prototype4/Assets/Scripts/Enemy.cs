@@ -1,16 +1,23 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Rigidbody _rb;
+    private GameObject _player;
+
+    public float moveSpeed = 3;
+
     void Start()
     {
-        
+        _rb = GetComponent<Rigidbody>();
+        _player = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        var moveDirection = (_player.transform.position - transform.position).normalized;
+
+        _rb.AddForce(moveDirection * moveSpeed);
     }
 }

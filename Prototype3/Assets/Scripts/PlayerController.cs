@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (isGameOver)
+            return;
+
         if (isOnGround && jumpAction.action.WasPressedThisFrame())
         {
             _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -42,7 +45,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             isGameOver = true;
-            Debug.Log("Game Over!");
+            _animator.SetBool("Death_b", true);
+            _animator.SetInteger("DeathType_int", 1);
         }
     }
 }

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed = 5;
     public bool hasPowerUp = false;
+    public float powerUpStrength = 15;
 
     public InputActionReference moveAction;
 
@@ -32,6 +33,17 @@ public class PlayerController : MonoBehaviour
         {
             hasPowerUp = true;
             Destroy(other.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && hasPowerUp)
+        {
+            var awayDirection = (collision.gameObject.transform.position - transform.position).normalized;
+
+            var enemyRb = collision.gameObject.GetComponent<Rigidbody>();
+            enemyRb.AddForce(awayDirection * powerUpStrength, ForceMode.Impulse);
         }
     }
 }

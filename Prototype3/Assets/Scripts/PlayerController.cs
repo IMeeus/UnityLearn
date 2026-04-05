@@ -3,10 +3,12 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody _rb;
     private Animator _animator;
+    private AudioSource _audioSource;
 
     public float jumpForce = 10;
     public float gravityModifier = 1;
@@ -16,11 +18,14 @@ public class PlayerController : MonoBehaviour
     public InputActionReference jumpAction;
     public ParticleSystem explosionParticle;
     public ParticleSystem dirtParticle;
+    public AudioClip jumpSound;
+    public AudioClip crashSound;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
 
         Physics.gravity *= gravityModifier;
     }
@@ -36,6 +41,7 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
             _animator.SetTrigger("Jump_trig");
             dirtParticle.Stop();
+            _audioSource.PlayOneShot(jumpSound, 1);
         }
     }
 
@@ -54,6 +60,7 @@ public class PlayerController : MonoBehaviour
             _animator.SetInteger("DeathType_int", 1);
             explosionParticle.Play();
             dirtParticle.Stop();
+            _audioSource.PlayOneShot(crashSound, 1);
         }
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class PlayerControllerX : MonoBehaviour
 {
     private AudioSource playerAudio;
-    private float gravityModifier = 1.5f;
 
     public bool gameOver;
     public float floatForce;
@@ -20,19 +19,18 @@ public class PlayerControllerX : MonoBehaviour
 
     void Start()
     {
-        Physics.gravity *= gravityModifier;
         playerAudio = GetComponent<AudioSource>();
         playerRb = GetComponent<Rigidbody>();
 
-        // Apply a small upward force at the start of the game
         playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
+        //Physics.gravity *= 2;
     }
 
     void Update()
     {
         if (jumpAction.action.WasPressedThisFrame() && !gameOver)
         {
-            playerRb.AddForce(Vector3.up * floatForce);
+            playerRb.AddForce(Vector3.up * floatForce, ForceMode.Impulse);
         }
     }
 

@@ -4,31 +4,46 @@ public class SpawnManager : MonoBehaviour
 {
     private readonly float spawnRange = 9;
 
+    public int waveNumber = 1;
+
     public GameObject enemyPrefab;
+    public GameObject powerUpPrefab;
 
     void Start()
     {
+        SpawnPowerUp();
         SpawnEnemyWave(3);
     }
 
     void Update()
     {
-        RespawnEnemies();
+        SpawnNextWave();
     }
 
     private void SpawnEnemyWave(int spawnCount)
     {
         for (int i = 0; i < spawnCount; i++)
         {
-            Instantiate(enemyPrefab, GenerateSpawnPoint(), enemyPrefab.transform.rotation);
+            SpawnEnemy();
         }
     }
 
-    private void RespawnEnemies()
+    private void SpawnEnemy()
+    {
+        Instantiate(enemyPrefab, GenerateSpawnPoint(), enemyPrefab.transform.rotation);
+    }
+
+    private void SpawnPowerUp()
+    {
+        Instantiate(powerUpPrefab, GenerateSpawnPoint(), powerUpPrefab.transform.rotation);
+    }
+
+    private void SpawnNextWave()
     {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
-            SpawnEnemyWave(1);
+            SpawnPowerUp();
+            SpawnEnemyWave(waveNumber++);
         }
     }
 

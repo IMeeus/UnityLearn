@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private GameObject _focalPoint;
 
     public float moveSpeed = 5;
+    public bool hasPowerUp = false;
 
     public InputActionReference moveAction;
 
@@ -23,5 +24,14 @@ public class PlayerController : MonoBehaviour
         var moveDirection = _focalPoint.transform.forward;
 
         _rb.AddForce(verticalInput * moveSpeed * moveDirection);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PowerUp"))
+        {
+            hasPowerUp = true;
+            Destroy(other.gameObject);
+        }
     }
 }

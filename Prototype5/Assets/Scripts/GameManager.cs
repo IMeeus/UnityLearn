@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnTarget());
+    }
+
+    void Update()
+    {
         DestroyTargetOnClick();
     }
 

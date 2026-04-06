@@ -11,6 +11,8 @@ public class Target : MonoBehaviour
 
     private Rigidbody rb;
 
+    public int pointValue = 5;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();

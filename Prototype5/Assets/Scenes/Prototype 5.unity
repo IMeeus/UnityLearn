@@ -374,6 +374,7 @@ MonoBehaviour:
   - {fileID: 3135286533467959311, guid: fe870e756938b8f4b9061a51fc365639, type: 3}
   - {fileID: 1103270610718368010, guid: 43f3b91bf48e6264ca742bfda47aad29, type: 3}
   - {fileID: 4606305439748458552, guid: 5173b320f49279b48bb4d6703fb8cd3d, type: 3}
+  scoreText: {fileID: 1140201940}
 --- !u!1 &494445611
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +692,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: '
+  m_text: 'Score: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8abe1e37fe7bf433896970245b936749, type: 2}
   m_sharedMaterial: {fileID: 21175996417216586, guid: 8abe1e37fe7bf433896970245b936749, type: 2}

@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private int score = 0;
     private float spawnRate = 1.0f;
+    private bool isGameOver = false;
 
     public List<GameObject> targets;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI gameOverText;
-
-    public void GameOver()
-    {
-        gameOverText.gameObject.SetActive(true);
-    }
+    public GameObject gameOverOverlay;
 
     void Start()
     {
@@ -28,9 +25,20 @@ public class GameManager : MonoBehaviour
         DestroyTargetOnClick();
     }
 
-    IEnumerator SpawnTarget()
+    public void GameOver()
     {
-        while (true)
+        gameOverOverlay.SetActive(true);
+        isGameOver = true;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private IEnumerator SpawnTarget()
+    {
+        while (!isGameOver)
         {
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, targets.Count);
@@ -38,7 +46,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void DestroyTargetOnClick()
+    private void DestroyTargetOnClick()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {

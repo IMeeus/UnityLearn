@@ -9,26 +9,30 @@ public class GameManager : MonoBehaviour
 {
     private int score = 0;
     private float spawnRate = 1.0f;
-    private bool isGameOver = false;
+    private bool isGameActive = false;
 
     public List<GameObject> targets;
     public TextMeshProUGUI scoreText;
     public GameObject gameOverOverlay;
-
-    void Start()
-    {
-        StartCoroutine(SpawnTarget());
-    }
+    public GameObject titleOverlay;
 
     void Update()
     {
         DestroyTargetOnClick();
     }
 
+    public void StartGame(int difficulty)
+    {
+        spawnRate /= difficulty;
+        isGameActive = true;
+        titleOverlay.SetActive(false);
+        StartCoroutine(SpawnTarget());
+    }
+
     public void GameOver()
     {
+        isGameActive = false;
         gameOverOverlay.SetActive(true);
-        isGameOver = true;
     }
 
     public void Restart()
@@ -38,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SpawnTarget()
     {
-        while (!isGameOver)
+        while (isGameActive)
         {
             yield return new WaitForSeconds(spawnRate);
             int index = Random.Range(0, targets.Count);

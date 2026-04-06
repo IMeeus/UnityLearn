@@ -10,13 +10,23 @@ public class Target : MonoBehaviour
     private readonly float ySpawnPos = -6;
 
     private Rigidbody rb;
+    private GameManager gameManager;
 
     public int pointValue = 5;
+    public ParticleSystem explosionParticle;
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.AddForce(RandomForce(), ForceMode.Impulse);
+
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
         var torque = new Vector3(RandomTorque(), RandomTorque(), RandomTorque());
         rb.AddTorque(torque, ForceMode.Impulse);
@@ -27,6 +37,11 @@ public class Target : MonoBehaviour
     void OnTriggerEnter(Collider _)
     {
         Destroy(gameObject);
+
+        if (!gameObject.CompareTag("Bad"))
+        {
+            gameManager.GameOver();
+        }
     }
 
     Vector3 RandomForce()

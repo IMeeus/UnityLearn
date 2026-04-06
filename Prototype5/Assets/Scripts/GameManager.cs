@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> targets;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI gameOverText;
+
+    public void GameOver()
+    {
+        gameOverText.gameObject.SetActive(true);
+    }
 
     void Start()
     {
@@ -39,12 +45,10 @@ public class GameManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                var hitGameObject = hit.collider.gameObject;
-                if (hitGameObject.CompareTag("Target"))
+                if (hit.collider.TryGetComponent<Target>(out var target))
                 {
-                    var target = hitGameObject.GetComponent<Target>();
                     AddScore(target.pointValue);
-                    Destroy(hit.collider.gameObject);
+                    target.Destroy();
                 }
             }
         }
